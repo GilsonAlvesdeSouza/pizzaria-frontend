@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div>Inicio do projeto NextJs</div>;
+  return (
+    <div>
+      <h1>Sujeito Pizza🍕</h1>
+    </div>
+  );
 }
