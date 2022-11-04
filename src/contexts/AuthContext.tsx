@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
+import { NULL } from "sass";
 
 type AuthContextData = {
   user: UserProps;
@@ -27,8 +28,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
 
-  const signIn = async () => {
-    alert("clicou no login");
+  const signIn = async ({ email, password }: SignInProps) => {
+    console.log(email, password);
   };
 
   return (

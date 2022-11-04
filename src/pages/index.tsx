@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react";
+import { FormEvent, HtmlHTMLAttributes, useContext, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,12 +9,15 @@ import { AuthContext } from "../contexts/AuthContext";
 
 export default function Home() {
   const { signIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
     const data = {
-      email: "teste@gmail.com",
-      password: "12345566",
+      email,
+      password,
     };
 
     await signIn(data);
@@ -29,9 +32,23 @@ export default function Home() {
         <Image src={logoImg} alt={"Sujeito Pizzaria"} />
         <div className={styles.login}>
           <form onSubmit={handleLogin}>
-            <C.Input type="text" placeholder="Informe seu email" />
-            <C.Input type="password" placeholder="Informe sua senha" />
-            <C.Button type="submit" loading={false}>
+            <C.Input
+              type="text"
+              placeholder="Informe seu email"
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
+            />
+            <C.Input
+              type="password"
+              placeholder="Informe sua senha"
+              value={password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
+            />
+            <C.Button type="submit" loading={loading}>
               Acessar
             </C.Button>
           </form>
