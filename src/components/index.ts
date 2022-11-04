@@ -1,3 +1,4 @@
-import { Input, Text } from "./ui/input/index";
+import { Input, Text } from "./ui/Input/index";
+import Button from "./ui/Button";
 
-export { Input, Text };
+export { Input, Text, Button };

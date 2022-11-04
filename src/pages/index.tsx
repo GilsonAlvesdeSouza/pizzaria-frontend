@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sujeito Pizza - Faça seu login</title>{" "}
+        <title>Sujeito Pizza - Faça seu login</title>
       </Head>
       <div className={styles.containerCenter}>
         <Image src={logoImg} alt={"Sujeito Pizzaria"} />
@@ -16,6 +16,9 @@ export default function Home() {
           <form action="">
             <C.Input type="text" placeholder="Informe seu email" />
             <C.Input type="password" placeholder="Informe sua senha" />
+            <C.Button type="submit" loading={false}>
+              Cadastrar
+            </C.Button>
           </form>
         </div>
       </div>
