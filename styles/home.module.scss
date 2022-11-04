@@ -16,6 +16,11 @@
   flex-direction: column;
   padding: 2rem 1.5rem;
 
+  h1{
+    color: var(--white);
+    padding-bottom: 1.5rem;
+  }
+
   input{
     &:hover{
       opacity: 0.8;
@@ -41,6 +46,7 @@
   cursor: pointer;
   filter: brightness(0.8);
   transition: all ease 0.2s;
+  padding: 15px;
 
   &:hover{
     filter: brightness(1);
