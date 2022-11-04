@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <div className={styles.containerCenter}>
         <Image src={logoImg} alt={"Sujeito Pizzaria"} />
-        <div className="styles.login">
+        <div className={styles.login}>
           <form action="">
             <C.Input type="text" placeholder="Informe seu email" />
             <C.Input type="password" placeholder="Informe sua senha" />
@@ -20,6 +20,7 @@ export default function Home() {
               Cadastrar
             </C.Button>
           </form>
+          <a className={styles.text}>Não possui uma conta? Cadastre-se</a>
         </div>
       </div>
     </>
