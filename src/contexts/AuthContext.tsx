@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState } from "react";
 import Router from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import { api } from "../services/apiClient";
+import { toast } from "react-toastify";
 
 type AuthContextData = {
   user: UserProps | undefined;
@@ -65,9 +66,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
+      toast.success("Login efetuado com sucesso!");
+
       Router.push("/dashboard");
     } catch (erro: any) {
-      console.log("Erro ao acessar ", erro.response.data.error);
+      if (erro.response.data.error === "User/password incorrect.") {
+        toast.error("Usuário ou senha incorretos!");
+        return;
+      }
+      toast.error("Ocorreu um erro ao tentar fazer login!");
     }
   };
 
@@ -79,11 +86,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         password,
       });
 
-      console.log("Cadastrado com sucesso.");
+      toast.success("Cadastrado com sucesso!");
 
       Router.push("/");
     } catch (error) {
-      console.log("Erro ao cadastrar ", error);
+      toast.error("Ocorreu um erro ao tentar cadastrar!");
     }
   };
 
