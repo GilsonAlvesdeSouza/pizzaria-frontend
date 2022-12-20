@@ -1,12 +1,14 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../../../styles/home.module.scss";
 import logoImg from "../../../public/img/logo.svg";
 import * as C from "../../components";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Signup() {
+  const { signUp } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,11 +17,15 @@ export default function Signup() {
   const handleSignUp = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (name === "" || email === "" || password === "") {
+    if ((name && email && password) === "") {
       alert("Preencha todos os campos.");
       return;
     }
     setLoading(true);
+
+    await signUp({ name, email, password });
+
+    setLoading(false);
   };
 
   return (
