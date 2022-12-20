@@ -31,6 +31,7 @@ export default function Home() {
       <div className={styles.containerCenter}>
         <Image src={logoImg} alt={"Sujeito Pizzaria"} />
         <div className={styles.login}>
+          <h1>Faça seu Login</h1>
           <form onSubmit={handleLogin}>
             <C.Input
               type="text"

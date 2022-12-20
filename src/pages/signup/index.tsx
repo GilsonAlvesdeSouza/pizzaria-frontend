@@ -7,7 +7,7 @@ import * as C from "../../components";
 
 export default function Signup() {
   return (
-    <>
+    <> 
       <Head>
         <title>Sujeito Pizza - Faça seu Cadastro</title>
       </Head>
