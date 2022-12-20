@@ -1,4 +1,4 @@
-import { FormEvent, HtmlHTMLAttributes, useContext, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,12 +15,20 @@ export default function Home() {
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (email === "" || password === "") {
+      return;
+    }
+    setLoading(true);
+
     const data = {
       email,
       password,
     };
 
     await signIn(data);
+
+    setLoading(false);
   };
 
   return (
