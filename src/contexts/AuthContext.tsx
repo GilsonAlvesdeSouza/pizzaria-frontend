@@ -3,6 +3,7 @@ import Router from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import { api } from "../services/apiClient";
 import { toast } from "react-toastify";
+import { errorOrAxiosError } from "../helpers/errorAxios";
 
 type AuthContextData = {
   user: UserProps | undefined;
@@ -69,12 +70,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       toast.success("Login efetuado com sucesso!");
 
       Router.push("/dashboard");
-    } catch (erro: any) {
-      if (erro.response.data.error === "User/password incorrect.") {
-        toast.error("Usuário ou senha incorretos!");
-        return;
+    } catch (error) {
+      const result = errorOrAxiosError(error);
+      if (result.type !== "error") {
+        if (result.message === "User/password incorrect.") {
+          toast.warn("Email ou senha inválidos!");
+          return;
+        }
       }
-      toast.error("Ocorreu um erro ao tentar fazer login!");
+
+      toast.error("Ocorreu um erro ao efetuar o login!");
     }
   };
 
@@ -90,6 +95,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       Router.push("/");
     } catch (error) {
+      const result = errorOrAxiosError(error);
+      if (result.type !== "error") {
+        if (result.message === "User Already exists") {
+          toast.warn("O email já está cadastrado!");
+          return;
+        }
+      }
+
       toast.error("Ocorreu um erro ao tentar cadastrar!");
     }
   };
